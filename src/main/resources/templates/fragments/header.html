@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}"/>
+</head>
+<body>
+<header>
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+	  <div class="container-fluid">
+	    <a th:href="@{/}" class="navbar-brand">SiwBooks</a>
+	
+		<!--
+	    <div class="collapse navbar-collapse" id="navbarNav">
+	      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+			
+
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Features</a>
+	        </li>
+	        <li class="nav-item">
+	          <a class="nav-link" href="#">Pricing</a>
+	        </li>
+			-->
+			<!-- Login/Logout --> <!--
+	        <li class="nav-item">
+				<div class="nav-item">
+		            <span th:if="${session.user != null}">
+		                Welcome, <span th:text="${session.user.name}">User</span> |
+		                <a class="nav-link" th:href="@{/logout}">Logout</a>
+		            </span>
+					<span th:if="${session.user == null}">
+		                <a class="nav-link" th:href="@{/login}">Login</a>
+		            </span>
+		        </div>
+	        </li>
+	      </ul>
+		  -->
+		  <form class="d-flex" role="search">
+			<!--
+	        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+	        <button class="btn btn-outline-success" type="submit">Search</button>
+			-->
+			<!-- Login/Logout -->
+			<span th:if="${session.user != null}">
+                Welcome, <span th:text="${session.user.name}">User</span> |
+                <a class="nav-link text-white" th:href="@{/logout}">Logout</a>
+            </span>
+			<span th:if="${session.user == null}">
+                <a class="nav-link text-white" th:href="@{/login}">Login</a>
+            </span>
+	      </form>
+	    </div>
+	  </div>
+	</nav>
+</header>
+</body>
+</html>

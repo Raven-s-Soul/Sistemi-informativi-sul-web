@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<head>
+	<link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}"/>
+	</head>
+<body>
+<footer id="footer" class="bg-dark text-bg-dark p-3">
+        <p>&copy; <span th:text="${#dates.format(#dates.createNow(), 'yyyy')}">2025</span> SiwBooks. All rights reserved.</p>
+</footer>
+</body>
+</html>
