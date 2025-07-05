@@ -19,7 +19,7 @@ public class Review {
     @Max(value = 5, message = "Il voto massimo è 5")
     private int rating;
 
-    @Column(length = 5000)
+    //@Column(length = 5000)
     private String text;
 
     @ManyToOne
@@ -30,6 +30,9 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
     
+    @ManyToOne
+    private Author autore;
+    
     // Getters, setters, constructors
     
 	public String getTitle() {
@@ -38,6 +41,38 @@ public class Review {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String text) {
+		this.text = text;
+	}
+
+	public @NonNull int getRating() {
+		return rating;
+	}
+
+	public void setRating(@NonNull int rating) {
+		this.rating = rating;
+	}
+
+	public Book getBook() {
+		return book;
+	}
+
+	public void setBook(Book book) {
+		this.book = book;
+	}
+
+	public Author getAutore() {
+		return autore;
+	}
+
+	public void setAutore(Author autore) {
+		this.autore = autore;
 	}
 
     

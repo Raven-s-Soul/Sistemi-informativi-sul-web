@@ -31,9 +31,11 @@ public class UserService {
      * @param username the username to search
      * @return the User if found, otherwise null
      */
+    /*
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username).orElse(null);
     }
+    */
 
     /**
      * Returns all users.

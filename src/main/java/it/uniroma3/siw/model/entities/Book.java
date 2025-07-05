@@ -1,6 +1,8 @@
 package it.uniroma3.siw.model.entities;
 
 import jakarta.persistence.*;
+
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -14,8 +16,8 @@ public class Book {
 
     private int publicationYear;
 
-    @ElementCollection
-    private List<String> imageUrls;
+    @OneToMany(mappedBy = "book", cascade = CascadeType.ALL)
+	private List<Image> immagini = new ArrayList<>();
 
     @ManyToMany
     @JoinTable(
