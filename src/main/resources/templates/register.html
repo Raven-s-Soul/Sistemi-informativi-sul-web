@@ -11,7 +11,7 @@
 
 	<div class="container">
 	        <div class="row justify-content-center">
-	                    <div class="card-body bg-dark text-white">
+	                    <div class="card-body bg-black text-white">
 	                        <h1 class="card-title text-center mb-4">Registrati</h1>
 							
 							<form th:action="@{/register}" th:object="${credentials}" method="post" class="container mb-2 col-lg-6">
@@ -23,36 +23,36 @@
 							    <div class="row mb-3">
 							        <div class="col">
 							            <label class="form-label">Nome</label>
-							            <input type="text" th:field="*{utente.name}" class="form-control" required />
+							            <input type="text" th:field="*{utente.name}" class="form-control bg-dark border-secondary text-white" required />
 							        </div>
 							        <div class="col">
 							            <label class="form-label">Cognome</label>
-							            <input type="text" th:field="*{utente.surname}" class="form-control" required />
+							            <input type="text" th:field="*{utente.surname}" class="form-control bg-dark border-secondary text-white" required />
 							        </div>
 							    </div>
 								
 								<!-- Username -->
 							    <div class="mb-3">
 							        <label class="form-label">Username</label>
-							        <input type="text" th:field="*{username}" class="form-control" required />
+							        <input type="text" th:field="*{username}" class="form-control bg-dark border-secondary text-white" required />
 							    </div>
 							
 							    <!-- Email (from nested User) -->
 							    <div class="mb-3">
 							        <label class="form-label">Email</label>
-							        <input type="email" th:field="*{utente.email}" class="form-control" required />
+							        <input type="email" th:field="*{utente.email}" class="form-control bg-dark border-secondary text-white" required />
 							    </div>
 							
 							    <!-- Password -->
 							    <div class="mb-3">
 							        <label class="form-label">Password</label>
-							        <input type="password" th:field="*{password}" class="form-control" required />
+							        <input type="password" th:field="*{password}" class="form-control bg-dark border-secondary text-white" required />
 							    </div>
 							
 							    <!-- Confirm Password (not part of entity, must be handled manually) -->
 							    <div class="mb-3">
 							        <label class="form-label">Conferma Password</label>
-							        <input type="password" name="repassword" class="form-control" required />
+							        <input type="password" name="repassword" class="form-control bg-dark border-secondary text-white" required />
 							    </div>
 							
 							    <!-- Submit -->

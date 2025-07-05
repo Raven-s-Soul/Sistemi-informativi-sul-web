@@ -13,7 +13,7 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-6">
-                    <div class="card-body bg-dark text-white">
+                    <div class="card-body bg-black text-white">
                         <h1 class="card-title text-center mb-4">Login</h1>
 
                         <!-- Error message -->
@@ -27,12 +27,12 @@
                         <form th:action="@{/login}" method="post" sec:csrf="true">
                             <div class="mb-3">
                                 <label for="username" class="form-label">Username</label>
-                                <input type="text" name="username" id="username" class="form-control" required>
+                                <input type="text" name="username" id="username" class="form-control bg-dark border-secondary text-white" required>
                             </div>
 
                             <div class="mb-3">
                                 <label for="password" class="form-label">Password</label>
-                                <input type="password" name="password" id="password" class="form-control" required>
+                                <input type="password" name="password" id="password" class="form-control bg-dark border-secondary text-white" required>
                             </div>
 
                             <div class="d-grid">

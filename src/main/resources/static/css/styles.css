@@ -7,3 +7,9 @@
 	bottom: 0px;
 	padding: 10px;
 }
+
+.style-occasional {
+  box-shadow: 0px 2px 10px gray;
+  z-index: 1;
+}
+

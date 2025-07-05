@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{/fragments/layouts/base_layout}">
+<head>
+    <title>Example</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+	<div class="container my-5">
+	    <div class="row g-4">
+	        <!-- Libri -->
+	        <div class="col-md-4">
+	            <div class="card  bg-dark border-secondary text-white shadow-sm h-100">
+	                <div class="card-body">
+	                    <h5 class="card-title">Libri</h5>
+	                    <div class="d-grid gap-2">
+	                        <a th:href="@{/book/add}" class="btn btn-success">Aggiungere</a>
+	                        <a th:href="@{/book/edit}" class="btn btn-dark border-secondary">Modificare</a>
+	                        <a th:href="@{/book/delete}" class="btn btn-danger">Cancellare</a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+
+	        <!-- Autori -->
+	        <div class="col-md-4">
+	           <div class="card  bg-dark border-secondary text-white shadow-sm h-100">
+	                <div class="card-body">
+	                    <h5 class="card-title">Autori</h5>
+	                    <div class="d-grid gap-2">
+	                        <a th:href="@{/author/add}" class="btn btn-success">Aggiungere</a>
+	                        <a th:href="@{/author/edit}" class="btn btn-dark border-secondary">Modificare</a>
+	                        <a th:href="@{/author/delete}" class="btn btn-danger">Cancellare</a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+
+	        <!-- Recensioni -->
+	        <div class="col-md-4">
+	            <div class="card  bg-dark border-secondary text-white shadow-sm h-100">
+	                <div class="card-body">
+	                    <h5 class="card-title">Recensioni</h5>
+	                    <div class="d-grid gap-2">
+	                        <a th:href="@{/review/delete}" class="btn btn-danger">Cancellare</a>
+	                    </div>
+	                </div>
+	            </div>
+	        </div>
+	    </div>
+	</div>
+	
+	
+</section>
+
+</body>
+</html>

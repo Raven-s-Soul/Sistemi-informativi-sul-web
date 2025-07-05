@@ -2,11 +2,11 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" type="text/css" media="all" th:href="@{/css/styles.css}"/>
+    <link rel="stylesheet" type="text/html" media="all" th:href="@{/css/styles.css}"/>
 </head>
 <body>
-<header>
-	<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+	<header th:class="style-occasional">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-black" >
 	  <div class="container-fluid">
 	    <a th:href="@{/}" class="navbar-brand">SiwBooks</a>
 	
@@ -37,15 +37,15 @@
 	      </ul>
 		  -->
 		  <form class="d-flex" role="search">
+			
+			<a class="btn btn-danger" th:href="@{/admin}" th:if="${user != null and user.role.toString() == 'ADMIN'}"  th:text="'Welcome, ' + ${user.name} + ' (' + ${user.role} + ')'"></a>
+			<a class="btn btn-success" th:href="@{/registered}" th:if="${user != null and user.role.toString() == 'REGISTERED'}"  th:text="'Welcome, ' + ${user.name} + ' (' + ${user.role} + ')'"></a>
 			<!--
 	        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
 	        <button class="btn btn-outline-success" type="submit">Search</button>
 			-->
 			<!-- Login/Logout -->
 			<span th:if="${user != null}" class="d-flex align-items-center text-white">
-			    <span>
-			        Welcome, <span th:text="${user.name}">User</span>
-			    </span>
 			    <span class="ms-4"> <!-- ms-3 adds margin-left -->
 			        <a class="nav-link text-white" th:href="@{/logout}">Logout</a>
 			    </span>
