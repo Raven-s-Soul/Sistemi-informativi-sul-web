@@ -5,7 +5,9 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.model.entities.Credentials;
 import it.uniroma3.siw.model.entities.User;
+import it.uniroma3.siw.repository.CredentialsRepository;
 import it.uniroma3.siw.repository.UserRepository;
 
 @Service
@@ -13,6 +15,9 @@ public class UserService {
 
     @Autowired
     private UserRepository userRepository;
+    
+    @Autowired
+    private CredentialsRepository credentialsRepository;
 
     /**
      * Retrieves a User by their ID.
@@ -73,5 +78,11 @@ public class UserService {
      */
     public boolean existsById(Long id) {
         return userRepository.existsById(id);
+    }
+
+    public User findByUsername(String username) {
+        return credentialsRepository.findByUsername(username)
+                .map(Credentials::getUtente)
+                .orElse(null);
     }
 }

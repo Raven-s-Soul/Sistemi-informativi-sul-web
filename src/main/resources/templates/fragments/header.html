@@ -42,13 +42,17 @@
 	        <button class="btn btn-outline-success" type="submit">Search</button>
 			-->
 			<!-- Login/Logout -->
-			<span th:if="${session.user != null}">
-                Welcome, <span th:text="${session.user.name}">User</span> |
-                <a class="nav-link text-white" th:href="@{/logout}">Logout</a>
-            </span>
-			<span th:if="${session.user == null}">
-                <a class="nav-link text-white" th:href="@{/login}">Login</a>
-            </span>
+			<span th:if="${user != null}" class="d-flex align-items-center text-white">
+			    <span>
+			        Welcome, <span th:text="${user.name}">User</span>
+			    </span>
+			    <span class="ms-4"> <!-- ms-3 adds margin-left -->
+			        <a class="nav-link text-white" th:href="@{/logout}">Logout</a>
+			    </span>
+			</span>
+			<span th:if="${user == null}">
+			    <a class="nav-link text-white" th:href="@{/login}">Login</a>
+			</span>
 	      </form>
 	    </div>
 	  </div>
