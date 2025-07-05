@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -18,14 +19,18 @@ public class AuthConfiguration {
     private DataSource dataSource;
 
     @Autowired
+    private PasswordEncoder passwordEncoder;
+    
+    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.jdbcAuthentication()
             .dataSource(dataSource)
+            .passwordEncoder(passwordEncoder)
             .usersByUsernameQuery(
                 "SELECT username, password, TRUE as enabled FROM credentials WHERE username = ?"
             )
             .authoritiesByUsernameQuery(
-                "SELECT username, role FROM credentials WHERE username = ?"
+            	"SELECT c.username, u.role FROM credentials c JOIN users u ON c.utente_id = u.id WHERE c.username = ?"
             );
     }
 
@@ -51,7 +56,7 @@ public class AuthConfiguration {
                 .loginPage("/login")
                 .loginProcessingUrl("/login")
                 .usernameParameter("username")
-                .passwordParameter("pwd")
+                .passwordParameter("password")
                 .defaultSuccessUrl("/", true)   
                 .failureUrl("/login?error=true")
                 .permitAll()

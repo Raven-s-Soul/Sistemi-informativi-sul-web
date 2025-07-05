@@ -9,22 +9,21 @@
 
 <section layout:fragment="content">
 
-	<div class="container py-5">
+	<div class="container">
 	        <div class="row justify-content-center">
 	                    <div class="card-body bg-dark text-white">
 	                        <h1 class="card-title text-center mb-4">Registrati</h1>
-
-							<!-- Messaggi di errore -->
-							<div th:if="${usernameError}" class="alert alert-danger" role="alert" th:text="${usernameError}"></div>
-							<div th:if="${emailError}" class="alert alert-danger" role="alert" th:text="${emailError}"></div>
 							
-							<form th:action="@{/register}" th:object="${credentials}" method="post" class="container py-5 mb-2 col-lg-6" novalidate>
-							
+							<form th:action="@{/register}" th:object="${credentials}" method="post" class="container mb-2 col-lg-6">
+								
+								<!-- Messaggi di errore -->
+								<div th:if="${msgError}" class="alert alert-danger" role="alert" th:text="${msgError}"></div>
+								
 								<!-- Nome e Cognome (add to User entity if not present) -->
 							    <div class="row mb-3">
 							        <div class="col">
 							            <label class="form-label">Nome</label>
-							            <input type="text" th:field="*{utente.username}" class="form-control" required />
+							            <input type="text" th:field="*{utente.name}" class="form-control" required />
 							        </div>
 							        <div class="col">
 							            <label class="form-label">Cognome</label>
@@ -53,16 +52,16 @@
 							    <!-- Confirm Password (not part of entity, must be handled manually) -->
 							    <div class="mb-3">
 							        <label class="form-label">Conferma Password</label>
-							        <input type="password" name="confermaPwd" class="form-control" required />
+							        <input type="password" name="repassword" class="form-control" required />
 							    </div>
 							
 							    <!-- Submit -->
 							    <div class="d-grid">
 							        <button  type="submit" class="btn btn-success">Registrati</button>
 									<p class="p-3 text-center">
-									        Hai già un account?
-									        <a th:href="@{/login}">Accedi</a>
-									    </p>
+								        Hai già un account?
+								        <a th:href="@{/login}">Accedi</a>
+								    </p>
 							    </div>
 							</form>
 	                    </div>
