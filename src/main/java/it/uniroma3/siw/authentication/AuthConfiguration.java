@@ -45,12 +45,12 @@ public class AuthConfiguration {
                                  "/css/**", "/js/**", "/images/**", "/image/**", "/webjars/**", "/favicon.ico",
                                  "/error").permitAll()
                 // ruoli
-                .requestMatchers("/admin/**")
-                    .hasAuthority("ADMIN")
-                .requestMatchers("/user/**")
+                
+                .requestMatchers("/registered/**", "/review/selector", "/review/edit", "/review/editForm", "/review/add")
                     .hasAuthority("REGISTERED")
+                    
+                .anyRequest().hasAuthority("ADMIN")
                 // tutte le altre richiedono login
-                .anyRequest().authenticated()
             )
             .formLogin(form -> form
                 .loginPage("/login")
