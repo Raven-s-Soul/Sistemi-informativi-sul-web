@@ -1,9 +1,9 @@
 package it.uniroma3.siw.advice;
 
-import java.security.Principal;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -22,15 +22,13 @@ public class GlobalModelAttributes {
     private  CredentialsService credentialService;
 
     @ModelAttribute
-    public void addUserToModel(Model model, Principal principal, Authentication authentication) {
-        if (principal != null) {
-            User user = userService.findByUsername(principal.getName());
+    public void addUserToModel(Model model, @AuthenticationPrincipal UserDetails userDetails, Authentication authentication) {
+        if (userDetails != null) {
+            User user = userService.findByUsername(userDetails.getUsername());
             String username = credentialService.getUsernameByUserId(user.getId());
             model.addAttribute("user", user);
             model.addAttribute("username", username);
         }
         
-        
-        //model.addAttribute();
     }
 }

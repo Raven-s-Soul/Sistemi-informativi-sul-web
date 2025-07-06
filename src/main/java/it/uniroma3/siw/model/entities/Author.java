@@ -16,12 +16,16 @@ public class Author {
 
     private String firstName;
     private String lastName;
+    
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate birthDate;
+    
     @Nullable
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deathDate;
+    
     private String nationality;
+    
 	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "image_id")
 	private Image foto;

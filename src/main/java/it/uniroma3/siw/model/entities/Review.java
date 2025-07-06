@@ -30,8 +30,10 @@ public class Review {
     @JoinColumn(name = "user_id")
     private User user;
     
+    /*
     @ManyToOne
     private Author autore;
+    */
     
     // Getters, setters, constructors
     
@@ -66,13 +68,30 @@ public class Review {
 	public void setBook(Book book) {
 		this.book = book;
 	}
-
+	/*
 	public Author getAutore() {
 		return autore;
 	}
 
 	public void setAutore(Author autore) {
 		this.autore = autore;
+	}
+	*/
+
+	public Long getId() {
+		return id;
+	}
+
+	public void setId(Long id) {
+		this.id = id;
+	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
 	}
 
     

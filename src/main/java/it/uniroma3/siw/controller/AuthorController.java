@@ -21,7 +21,8 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
     
-    @Autowired
+    @SuppressWarnings("unused")
+	@Autowired
     private BookService bookService;
 
 	@GetMapping("/list")

@@ -55,6 +55,28 @@
 							        <input type="password" name="repassword" class="form-control bg-dark border-secondary text-white" required />
 							    </div>
 							
+								<!-- 
+									
+									Email (from nested User)
+									<div class="form-floating mb-3">
+									    <input type="email"  id="floatingInput" placeholder="email" th:field="*{utente.email}" class="form-control bg-dark border-secondary text-white" required />
+										<label for="floatingInput" class="form-label text-white">Email</label>
+									</div>
+
+									Password 
+									<div class="form-floating mb-3">
+									    <input type="password" id="floatingPassword" placeholder="Password" th:field="*{password}" class="form-control bg-dark border-secondary text-white" required />
+										<label for="floatingPassword" class="form-label text-white">Password</label>
+									</div>
+
+									Confirm Password (not part of entity, must be handled manually) 
+									<div class="form-floating mb-3"> 
+									    <input type="password" name="repassword" id="floatingPassword" placeholder="Conferma Password" class="form-control bg-dark border-secondary text-white" required />
+										<label for="floatingPassword" class="form-label text-white">Conferma Password</label>
+									</div>
+									
+								-->
+								
 							    <!-- Submit -->
 							    <div class="d-grid">
 							        <button  type="submit" class="btn btn-success">Registrati</button>

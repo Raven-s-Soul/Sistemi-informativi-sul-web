@@ -36,3 +36,27 @@ main {
   max-height: 14rem;
   object-fit: cover;
 }
+
+.rating {
+    direction: rtl;
+    unicode-bidi: bidi-override;
+    display: inline-flex;
+    font-size: 2rem;
+}
+
+.rating > input {
+    display: none;
+}
+
+.rating > label {
+    color: #ddd;
+    cursor: pointer;
+    padding: 0 5px;
+    transition: color 0.2s;
+}
+
+.rating > input:checked ~ label,
+.rating > label:hover,
+.rating > label:hover ~ label {
+    color: #ffc107; /* Bootstrap's yellow */
+}

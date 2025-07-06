@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/fragments/layouts/base_layout}">
+<head>
+    <title>Lista Recensioni</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Recensioni dei Libri</h2>
+
+		<div th:each="book : ${books}">
+		    <h4 class="text-white" th:text="${book.title}">Titolo Libro</h4>
+
+		    <div th:if="${#maps.containsKey(reviewMap, book.id)}">
+		        <table class="table table-striped table-bordered">
+		            <thead class="table-dark">
+		                <tr>
+		                    <th>Titolo Recensione</th>
+		                    <th>Voto</th>
+		                    <th>Testo</th>
+		                    <th>Utente</th>
+		                </tr>
+		            </thead>
+		            <tbody class="table-dark">
+		                <tr th:each="review : ${reviewMap[book.id]}">
+		                    <td th:text="${review.title}">Titolo</td>
+		                    <td th:text="${review.rating}">5</td>
+		                    <td th:text="${review.text}">Contenuto</td>
+							<td th:text="${review.user.username}">Username</td>
+		                </tr>
+		            </tbody>
+		        </table>
+		    </div>
+		    <div th:if="${!#maps.containsKey(reviewMap, book.id)}">
+		        <p class="text-white">Nessuna recensione disponibile.</p>
+		    </div>
+		    <hr/>
+		</div>
+    </div>
+
+</section>
+
+</body>
+</html>

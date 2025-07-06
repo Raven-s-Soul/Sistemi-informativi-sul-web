@@ -79,7 +79,7 @@ public class UserService {
     public boolean existsById(Long id) {
         return userRepository.existsById(id);
     }
-
+    
     public User findByUsername(String username) {
         return credentialsRepository.findByUsername(username)
                 .map(Credentials::getUtente)

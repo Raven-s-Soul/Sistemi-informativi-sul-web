@@ -27,6 +27,9 @@ public class User {
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private List<Review> reviews;
+    
+    @OneToOne(mappedBy = "utente")
+    private Credentials credentials;
 
     // Getters, setters, constructors
 
@@ -69,6 +72,9 @@ public class User {
 	public void setRole(UserRole role) {
 		this.role = role;
 	}
+	
+	public String getUsername() {
+	    return credentials != null ? credentials.getUsername() : "";
+	}
 
-    
 }

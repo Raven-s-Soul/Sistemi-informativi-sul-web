@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/fragments/layouts/base_layout}">
+<head>
+    <title>Seleziona libro per la recenzione</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+
+    <div class="container mt-4">
+        <h2 class="mb-4">Seleziona libro per la recenzione</h2>
+
+        <table class="table table-striped table-bordered align-middle style-occasional table-hover text-nowrap">
+            <thead class="table-dark">
+                <tr>
+                    <th style="width: 30%;">Cover</th>
+                    <th>Titolo</th>
+                    <th>Anno</th>
+                    <th>Autore</th>
+					<th>Azione</th>
+                </tr>
+            </thead>
+            <tbody class="table-dark">
+                <tr th:each="book : ${books}">
+					<td class="text-center">
+					    <div th:if="${map[book.id] != null}">
+					        <img th:src="@{'/image/book/' + ${book.id} + '/0'}"
+					             class="img-thumbnail cover-image-small mx-auto d-block" />
+					    </div>
+					    <div th:if="${map[book.id] == null}">
+					        <span>No image</span>
+					    </div>
+					</td>
+                    <td th:text="${book.title}">Title</td>
+                    <td th:text="${book.publicationYear}">Year</td>
+                    <td>
+                        <ul class="mb-0 ps-3">
+                            <li th:each="author : ${book.authors}" 
+                                th:text="${author.firstName + ' ' + author.lastName}">Author Name</li>
+                        </ul>
+                    </td>
+					<td class="text-center">
+						<a th:href="@{'/review/add/' + ${book.id}}" class="btn btn-primary">Aggiungi</a>
+					</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+</section>
+
+</body>
+</html>
