@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="~{/fragments/layouts/base_layout}">
+<head>
+    <title>Example</title>
+</head>
+<body>
+
+<section layout:fragment="content">
+	
+	<table class="table table-striped table-bordered table-hover">
+	  <thead class="table-dark">
+	    <tr>
+	      <th>Libro</th>
+	      <th>Titolo Recensione</th>
+	      <th>Voto</th>
+	      <th>Testo</th>
+	      <th>Azione</th>
+	    </tr>
+	  </thead>
+	  <tbody class="table-dark">
+	    <tr th:each="review : ${reviews}">
+	      <td th:text="${review.book.title}">Titolo Libro</td>
+	      <td th:text="${review.title}">Titolo Recensione</td>
+	      <td>
+	        <span>
+	          <span th:each="i : ${#numbers.sequence(1, review.rating)}" style="color: gold; font-size: 1.2em;">&#9733;</span>
+	        </span>
+	      </td>
+	      <td th:text="${review.text}">Testo recensione</td>
+	      <td class="text-center">
+	        <a th:href="@{'/review/edit/' + ${review.id}}" class="btn btn-primary btn-sm">Modifica</a>
+	      </td>
+	    </tr>
+	  </tbody>
+	</table>
+
+</section>
+
+</body>
+</html>

@@ -59,25 +59,6 @@ public class ReviewController {
 	    return "review/list";
 	}
 
-    // Show form to add a review for a specific book
-    @GetMapping("/add/{bookId}")
-    public String showAddForm(@PathVariable Long bookId, Model model) {
-        Book book = bookService.getBookById(bookId);
-        Review review = new Review();
-        review.setBook(book);
-
-        model.addAttribute("review", review);
-        model.addAttribute("book", book);
-        return "review/add";  // -> templates/review/add.html
-    }
-
-    // Show form to edit an existing review
-    @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
-        Review review = reviewService.getReviewById(id);
-        model.addAttribute("review", review);
-        return "review/edit";  // -> templates/review/edit.html
-    }
 
     // Show form to select book for review
     @GetMapping("/select")
@@ -95,9 +76,19 @@ public class ReviewController {
          
          return "review/selector";  // -> templates/review/list.html
     }
+    
+    // Show form to add a review for a specific book
+    @GetMapping("/add/{bookId}")
+    public String showAddForm(@PathVariable Long bookId, Model model) {
+        Book book = bookService.getBookById(bookId);
+        Review review = new Review();
+        review.setBook(book);
 
-    // === POST Routes ===
-
+        model.addAttribute("review", review);
+        model.addAttribute("book", book);
+        return "review/add";  // -> templates/review/add.html
+    }
+    
     // Save new review
     @PostMapping("/add/{bookId}")
     public String addReview(@PathVariable Long bookId, @Valid @ModelAttribute Review review,
@@ -116,18 +107,38 @@ public class ReviewController {
         return "redirect:/review/list";
     }
 
-    // Save edits to review
+    @GetMapping("/edit")
+    public String listUserReviewsForEdit(@AuthenticationPrincipal UserDetails userDetails, Model model) {
+        User currentUser = userService.findByUsername(userDetails.getUsername());
+        List<Review> userReviews = reviewService.getReviewsByUser(currentUser);
+        model.addAttribute("reviews", userReviews);
+        return "review/edit";  // pagina per scegliere quale modificare
+    }
+
+ // Mostra il form per modificare una review esistente
+    @GetMapping("/edit/{id}")
+    public String showEditForm(@PathVariable Long id, Model model) {
+        Review review = reviewService.getReviewById(id);
+        model.addAttribute("review", review);
+        return "review/editForm";  // -> template per il form di edit
+    }
+
     @PostMapping("/edit/{id}")
     public String editReview(@PathVariable Long id, @Valid @ModelAttribute Review review,
-                             BindingResult result) {
+                             BindingResult result, @RequestParam Long bookId, @AuthenticationPrincipal UserDetails userDetails) {
         if (result.hasErrors()) {
             return "review/edit";
         }
+        User user = userService.findByUsername(userDetails.getUsername());
+        review.setUser(user);
+        Book book = bookService.getBookById(bookId);
+        review.setBook(book);
         review.setId(id);
         reviewService.saveReview(review);
-        return "redirect:/review/list";
+        return "redirect:/review/edit";
     }
-    
+
+
     @GetMapping("/delete")
     public String showDeleteReview(Model model) {
     	List<Book> books = (List<Book>) bookService.getAllBooks();
@@ -146,7 +157,7 @@ public class ReviewController {
     }
     
     // Delete review
-    @PostMapping("/delete/{id}") //TODO
+    @PostMapping("/delete/{id}")
     public String deleteReview(@PathVariable Long id) {
         reviewService.deleteReviewById(id);
         return "redirect:/review/delete";

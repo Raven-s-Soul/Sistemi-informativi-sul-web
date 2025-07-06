@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/fragments/layouts/base_layout}">
+<head>
+    <title>Modifica Recensione</title>
+</head>
+<body>
+
+<section layout:fragment="content" class="container mt-4">
+
+    <h2 class="mb-4 text-white">Modifica Recensione</h2>
+
+    <form th:action="@{'/review/edit/' + ${review.id}}" th:object="${review}" method="post" class="row g-3 needs-validation">
+		
+		<input type="hidden" name="bookId" th:value="${review.book.id}" />
+
+        <!-- Titolo -->
+        <div class="col-md-12">
+            <label for="title" class="form-label text-white">Titolo</label>
+            <input type="text" th:field="*{title}" class="form-control bg-dark border-secondary text-white" id="title" required />
+            <div class="invalid-feedback">
+                Inserisci un titolo valido.
+            </div>
+        </div>
+
+        <!-- Voto (Rating) -->
+        <div class="col-md-12">
+            <label class="form-label text-white">Voto</label>
+            <div class="rating">
+                <input type="radio" name="rating" id="star5" value="5" th:field="*{rating}" />
+                <label for="star5" title="5 stelle">★</label>
+
+                <input type="radio" name="rating" id="star4" value="4" th:field="*{rating}" />
+                <label for="star4" title="4 stelle">★</label>
+
+                <input type="radio" name="rating" id="star3" value="3" th:field="*{rating}" />
+                <label for="star3" title="3 stelle">★</label>
+
+                <input type="radio" name="rating" id="star2" value="2" th:field="*{rating}" />
+                <label for="star2" title="2 stelle">★</label>
+
+                <input type="radio" name="rating" id="star1" value="1" th:field="*{rating}" />
+                <label for="star1" title="1 stella">★</label>
+            </div>
+            <div class="text-danger" th:if="${#fields.hasErrors('rating')}" th:errors="*{rating}"></div>
+        </div>
+
+        <!-- Testo -->
+        <div class="col-md-12">
+            <label for="text" class="form-label text-white">Testo</label>
+            <textarea th:field="*{text}" rows="5" class="form-control bg-dark border-secondary text-white" id="text"></textarea>
+        </div>
+
+        <!-- Submit -->
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Salva Modifiche</button>
+            <a th:href="@{/review/list}" class="btn btn-secondary ms-2">Annulla</a>
+        </div>
+
+    </form>
+
+</section>
+
+</body>
+</html>
