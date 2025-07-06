@@ -46,8 +46,8 @@ public class AuthConfiguration {
                                  "/error").permitAll()
                 // ruoli
                 
-                .requestMatchers("/registered/**", "/review/selector", "/review/edit", "/review/editForm", "/review/add")
-                    .hasAuthority("REGISTERED")
+                .requestMatchers("/registered/**", "/review/select", "/review/edit", "/review/editForm", "/review/add", "/review/edit/**", "/review/add/**")
+                    .hasAnyAuthority("REGISTERED", "ADMIN")
                     
                 .anyRequest().hasAuthority("ADMIN")
                 // tutte le altre richiedono login

@@ -126,8 +126,12 @@ public class ReviewController {
 
  // Mostra il form per modificare una review esistente
     @GetMapping("/edit/{id}")
-    public String showEditForm(@PathVariable Long id, Model model) {
+    public String showEditForm(@PathVariable Long id, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         Review review = reviewService.getReviewById(id);
+
+        if(review.getUser() != userService.findByUsername(userDetails.getUsername()))
+        	return "redirect:/review/edit";
+        
         model.addAttribute("review", review);
         return "review/editForm";  // -> template per il form di edit
     }

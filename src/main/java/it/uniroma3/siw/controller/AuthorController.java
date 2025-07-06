@@ -61,7 +61,7 @@ public class AuthorController {
         }
         
         authorService.saveAuthor(author);
-        return "redirect:/author";
+        return "redirect:/author/list";
     }
 
     @GetMapping("/edit")
@@ -111,12 +111,12 @@ public class AuthorController {
 
         // Check and update image only if uploaded
         if (imageFile != null && !imageFile.isEmpty()) {
-        	Image img = new Image();
-        	img.setAutore(author);
+            Image img = existingAuthor.getFoto();
+            if (img == null) {
+                img = new Image();
+                img.setAutore(existingAuthor);
+            }
             img.setImage(imageFile.getBytes());
-            
-            author.setFoto(img);
-            
             existingAuthor.setFoto(img);
         }
 
