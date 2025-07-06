@@ -93,5 +93,13 @@ public class Author {
 	    }
 	    this.foto.setImage(bytes);
 	}
+
+	public List<Book> getBooks() {
+		return books;
+	}
+
+	public void setBooks(List<Book> books) {
+		this.books = books;
+	}
     
 }

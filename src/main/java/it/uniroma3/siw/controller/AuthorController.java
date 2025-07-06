@@ -3,7 +3,6 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.model.entities.Author;
 import it.uniroma3.siw.model.entities.Image;
 import it.uniroma3.siw.service.AuthorService;
-import it.uniroma3.siw.service.ImageService;
 import jakarta.validation.Valid;
 
 import java.io.IOException;
@@ -25,8 +24,7 @@ public class AuthorController {
     
     
 
-    // Show all authors
-    @GetMapping
+	@GetMapping("/list")
     public String listAuthors(Model model) {
         model.addAttribute("authors", authorService.findAll());
         return "author/list";

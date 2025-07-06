@@ -1,7 +1,5 @@
 package it.uniroma3.siw.controller;
 
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,11 +41,11 @@ public class BookController {
     // Show form to edit a book by ID
     @GetMapping("/edit/{id}")
     public String showEditForm(@PathVariable Long id, Model model) {
-        Optional<Book> book = bookService.findById(id);
-        if (book.isEmpty()) {
+        Book book = bookService.getBookById(id);
+        if (book != null) {
             return "redirect:/books"; // or show error page
         }
-        model.addAttribute("book", book.get());
+        model.addAttribute("book", book);
         return "book/edit"; // Thymeleaf template for edit form
     }
 

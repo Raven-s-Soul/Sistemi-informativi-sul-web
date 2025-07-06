@@ -60,5 +60,13 @@ public class Book {
 		this.authors = authors;
 	}
 
+	public List<Image> getImmagini() {
+		return immagini;
+	}
+
+	public void setImmagini(List<Image> immagini) {
+		this.immagini = immagini;
+	}
+
 
 }

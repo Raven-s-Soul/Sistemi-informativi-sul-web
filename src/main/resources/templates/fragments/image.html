@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head></head>
+<body>
+
+<!-- Single author image -->
+<div th:fragment="authorImage(authorId)">
+    <img th:src="@{'/image/author/' + ${authorId}}"
+         alt="Author Image"
+         style="max-height:150px;" />
+</div>
+
+<!-- One book image by index -->
+<div th:fragment="bookImage(bookId, imageIndex)">
+    <img th:src="@{'/image/book/' + ${bookId} + '/' + ${imageIndex}}"
+         alt="Book Image"
+         style="max-height:150px;" />
+</div>
+
+<!-- All book images -->
+<div th:fragment="bookImages(book)">
+    <div th:each="img, iterStat : ${book.immagini}">
+        <img th:src="@{'/image/book/' + ${book.id} + '/' + ${iterStat.index}}"
+             alt="Book Image"
+             style="max-height:150px; margin-right:5px;" />
+    </div>
+</div>
+
+</body>
+</html>

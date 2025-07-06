@@ -64,7 +64,7 @@ public class AuthorService {
     }
 
 	public Object findAll() {
-		// TODO Auto-generated method stub
-		return null;
+		return authorRepository.findAll();
 	}
+
 }
