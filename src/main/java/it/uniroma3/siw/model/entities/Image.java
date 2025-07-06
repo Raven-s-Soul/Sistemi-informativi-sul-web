@@ -30,11 +30,11 @@ public class Image {
 		return id;
 	}
 
-	public Book getLibro() {
+	public Book getBook() {
 		return book;
 	}
 
-	public void setLibro(Book book) {
+	public void setBook(Book book) {
 		this.book = book;
 	}
 

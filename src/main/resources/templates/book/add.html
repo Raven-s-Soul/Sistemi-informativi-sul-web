@@ -3,33 +3,63 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/fragments/layouts/base_layout}">
 <head>
-    <title>Add Book</title>
+    <title>Aggiungi Libro</title>
 </head>
 <body>
 <section layout:fragment="content">
-    <div class="container py-5">
-        <h2>Add New Book</h2>
-        <form th:action="@{/book/add}" th:object="${book}" method="post" novalidate>
+    <div class="container mt-4">
+        <h2>Aggiungi un nuovo libro</h2>
+
+        <form th:action="@{/book/add}" method="post" enctype="multipart/form-data" th:object="${book}">
             <div class="mb-3">
-                <label for="title" class="form-label">Title</label>
-                <input type="text" th:field="*{title}" class="form-control" id="title" required />
-                <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+                <label for="title" class="form-label">Titolo</label>
+                <input type="text" class="form-control bg-dark border-secondary text-white" th:field="*{title}" required />
             </div>
 
             <div class="mb-3">
-                <label for="author" class="form-label">Author</label>
-				<select multiple th:field="*{authors}" class="form-control" id="authors" required>
-				  <option th:each="author : ${allAuthors}"
-				          th:value="${author.id}"
-				          th:text="${author.name}">
-				  </option>
-				</select>
-				<div class="text-danger" th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}"></div>
+                <label for="publicationYear" class="form-label">Anno di publicazione</label>
+                <input type="number" class="form-control bg-dark border-secondary text-white" th:field="*{publicationYear}" required />
+				
             </div>
 
-            <button type="submit" class="btn btn-success">Add Book</button>
+            <!-- Authors (multi-select) -->
+			<div class="mb-3">
+			        <label class="form-label">Autori selezionati</label>
+			        <table class="table table-striped table-bordered align-middle style-occasional table-hover">
+			            <thead class="table-dark">
+			                <tr>
+			                    <th>Nome</th>
+			                    <th>Nazionalità</th>
+			                    <th>Seleziona</th>
+			                </tr>
+			            </thead>
+			            <tbody class="table-dark">
+			                <tr th:each="author : ${authors}">
+			                    
+			                    <td th:text="${author.firstName + ' ' + author.lastName}">Author Name</td>
+			                    <td th:text="${author.nationality}">Nationality</td>
+								<td>
+		                        <input type="checkbox" name="authorIds"
+		                               th:value="${author.id}" />
+		                    </td>
+			                </tr>
+			            </tbody>
+			        </table>
+			    </div>
+
+            <!-- Image Upload -->
+            <div class="mb-3">
+                <label for="imageFiles" class="form-label">Foto</label>
+                <input type="file" name="imageFiles" multiple class="form-control  bg-dark border-secondary text-white" />
+            </div>
+
+            <button type="submit" class="btn btn-primary">Add Book</button>
+
         </form>
     </div>
+	
+	
+	
 </section>
 </body>
 </html>

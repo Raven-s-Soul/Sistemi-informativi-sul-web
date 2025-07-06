@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{/fragments/layouts/base_layout}">
 <head>
-    <title>Authors</title>
+    <title>Autori</title>
 </head>
 <body>
 
@@ -18,10 +18,10 @@
 		<table class="table table-striped table-bordered align-middle style-occasional table-hover">
 		    <thead class="table-dark">
 		        <tr>
-		            <th>Name</th>
-		            <th>Dates</th>
-		            <th>Nationality</th>
-		            <th>Photo</th>
+		            <th>Nome</th>
+		            <th>Date</th>
+		            <th>Nazionalità</th>
+		            <th>Foto</th>
 					<!-- <th>Books</th> -->
 		        </tr>
 		    </thead>
@@ -34,8 +34,7 @@
 					<td>
 					    <img th:src="${author.foto != null} ? @{'/image/author/' + ${author.id}} : @{/images/default-profile.jpg}"
 					         alt="Foto" 
-					         class="img-thumbnail"
-					         style="max-height: 200px;" />
+					         class="img-thumbnail cover-image-small" />
 					</td>
 					<!-- 
 					<td class="text-center">

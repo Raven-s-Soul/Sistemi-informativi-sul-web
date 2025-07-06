@@ -1,5 +1,6 @@
 package it.uniroma3.siw.service;
 
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -63,8 +64,16 @@ public class AuthorService {
         return authorRepository.existsById(id);
     }
 
-	public Object findAll() {
+	public Iterable<Author> findAll() {
 		return authorRepository.findAll();
+	}
+
+	public Iterable<Author> findAuthorsByIds(List<Long> ids) {
+	    return authorRepository.findAllById(ids);
+	}
+
+	public Iterable<Author> findAllById(List<Long> authorIds) {
+		return authorRepository.findAllById(authorIds);
 	}
 
 }

@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
       layout:decorate="~{/fragments/layouts/base_layout}">
 <head>
-    <title>Add Author</title>
+    <title>Aggiungi Autore</title>
 </head>
 <body>
 <section layout:fragment="content">
@@ -15,37 +15,37 @@
 
             <div class="mb-3">
                 <label for="firstName" class="form-label">Nome</label>
-                <input type="text" id="firstName" class="form-control" th:field="*{firstName}" placeholder="Inserisci nome" required />
+                <input type="text" id="firstName" class="form-control bg-dark border-secondary text-white" th:field="*{firstName}" placeholder="Inserisci nome" required />
                 <div class="text-danger" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="lastName" class="form-label">Cognome</label>
-                <input type="text" id="lastName" class="form-control" th:field="*{lastName}" placeholder="Inserisci cognome" required />
+                <input type="text" id="lastName" class="form-control bg-dark border-secondary text-white" th:field="*{lastName}" placeholder="Inserisci cognome" required />
                 <div class="text-danger" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="birthDate" class="form-label">Data di nascita</label>
-                <input type="date" id="birthDate" class="form-control" th:field="*{birthDate}" required />
+                <input type="date" id="birthDate" class="form-control bg-dark border-secondary text-white" th:field="*{birthDate}" required />
                 <div class="text-danger" th:if="${#fields.hasErrors('birthDate')}" th:errors="*{birthDate}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="deathDate" class="form-label">Data di morte (facoltativa)</label>
-                <input type="date" id="deathDate" class="form-control" th:field="*{deathDate}" />
+                <input type="date" id="deathDate" class="form-control bg-dark border-secondary text-white" th:field="*{deathDate}" />
                 <div class="text-danger" th:if="${#fields.hasErrors('deathDate')}" th:errors="*{deathDate}"></div>
             </div>
 
             <div class="mb-3">
                 <label for="nationality" class="form-label">Nazionalità</label>
-                <input type="text" id="nationality" class="form-control" th:field="*{nationality}" placeholder="Inserisci nazionalità" />
+                <input type="text" id="nationality" class="form-control bg-dark border-secondary text-white" th:field="*{nationality}" placeholder="Inserisci nazionalità" />
                 <div class="text-danger" th:if="${#fields.hasErrors('nationality')}" th:errors="*{nationality}"></div>
             </div>
 
 			<div class="mb-3">
 			    <label for="imagePath" class="form-label">Immagine (upload):</label>
-			    <input class="form-control" type="file" name="imageFile" accept="image/*" />
+			    <input class="form-control bg-dark border-secondary text-white" type="file" name="imageFile" accept="image/*" />
 			</div>
 
             <button type="submit" class="btn btn-primary">Salva</button>

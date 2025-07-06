@@ -40,9 +40,9 @@ public class AuthConfiguration {
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
                 // pagine pubbliche
-                .requestMatchers("/", "/index", "/libri/**", "/autori/**",
+                .requestMatchers("/", "/home", "/book/list", "/author/list",
                                  "/login", "/register",
-                                 "/css/**", "/js/**", "/images/**", "/webjars/**", "/favicon.ico",
+                                 "/css/**", "/js/**", "/images/**", "/image/**", "/webjars/**", "/favicon.ico",
                                  "/error").permitAll()
                 // ruoli
                 .requestMatchers("/admin/**")

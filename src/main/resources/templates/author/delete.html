@@ -3,7 +3,7 @@
       xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	  layout:decorate="~{/fragments/layouts/base_layout}">
 <head>
-    <title>Authors Delete</title>
+    <title>Cancella Autori</title>
 </head>
 <body>
 
@@ -18,12 +18,12 @@
 		<table class="table table-striped table-bordered align-middle style-occasional table-hover">
 		    <thead class="table-dark">
 		        <tr>
-		            <th>Name</th>
-		            <th>Dates</th>
-		            <th>Nationality</th>
-		            <th>Photo</th>
+		            <th>Nome</th>
+		            <th>Date</th>
+		            <th>Nazionalità</th>
+		            <th>Foto</th>
 					<!-- <th>Books</th> -->
-					<th>Action</th>
+					<th>Azione</th>
 		        </tr>
 		    </thead>
 		    <tbody class="table-dark">
@@ -35,8 +35,7 @@
 					<td>
 					    <img th:src="${author.foto != null} ? @{'/image/author/' + ${author.id}} : @{/images/default-profile.jpg}"
 					         alt="Foto" 
-					         class="img-thumbnail"
-					         style="max-height: 200px;" />
+					         class="img-thumbnail cover-image-small"/>
 					</td>
 					<!-- 
 					<td class="text-center">
@@ -47,7 +46,7 @@
 				<td class="text-center">
 				    <form th:action="@{'/author/delete/' + ${author.id}}" method="get">
 				        <button type="submit" class="btn btn-danger btn-sm">
-				            Delete
+				            Cancella
 				        </button>
 				    </form>
 				</td>
