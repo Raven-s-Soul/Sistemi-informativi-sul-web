@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/fragments/layouts/base_layout}">
+<head>
+    <title>Edit Author</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container mt-4">
+        <h2>Edit Author</h2>
+
+        <form th:action="@{'/author/edit/' + ${author.id}}" th:object="${author}" method="post" enctype="multipart/form-data" class="row g-3">
+
+            <!-- First Name -->
+            <div class="col-md-6">
+                <label for="firstName" class="form-label">First Name</label>
+                <input type="text" th:field="*{firstName}" class="form-control" required />
+            </div>
+
+            <!-- Last Name -->
+            <div class="col-md-6">
+                <label for="lastName" class="form-label">Last Name</label>
+                <input type="text" th:field="*{lastName}" class="form-control" required />
+            </div>
+
+            <!-- Birth Date -->
+            <div class="col-md-6">
+                <label for="birthDate" class="form-label">Birth Date</label>
+                <input type="date" th:field="*{birthDate}" class="form-control" required />
+            </div>
+
+            <!-- Death Date -->
+            <div class="col-md-6">
+                <label for="deathDate" class="form-label">Death Date</label>
+                <input type="date" th:field="*{deathDate}" class="form-control" />
+            </div>
+
+            <!-- Nationality -->
+            <div class="col-md-12">
+                <label for="nationality" class="form-label">Nationality</label>
+                <input type="text" th:field="*{nationality}" class="form-control" required />
+            </div>
+
+            <!-- Photo -->
+            <div class="col-md-12">
+                <label for="imageFile" class="form-label">Photo</label>
+				<div class="row ">
+					<div class="col-md-6">
+	                	<input type="file" name="imageFile" class="form-control" />
+					</div>
+	                <div class="col-md-6 mt-3 mt-md-0 text-center">
+	                    <img name="imageFile" th:if="${author.foto != null}" th:src="@{'/image/author/' + ${author.id}}"
+	                         alt="Author photo" class="img-thumbnail" style="max-height:19rem; object-fit: cover;" />
+	                </div>
+				</div>
+            </div>
+
+            <!-- Books (readonly or listing) 
+            <div class="col-md-12">
+                <label class="form-label">Books</label>
+                <ul class="list-group">
+                    <li th:each="book : ${books}" class="list-group-item" th:text="${book.title}">Book Title</li>
+                </ul>
+            </div>
+			-->
+
+            <!-- Submit -->
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary">Save Changes</button>
+                <a th:href="@{/author/list}" class="btn btn-secondary ms-2">Cancel</a>
+            </div>
+
+        </form>
+    </div>
+</section>
+</body>
+</html>

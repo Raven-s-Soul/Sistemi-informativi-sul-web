@@ -29,7 +29,7 @@
 		        <tr th:each="author : ${authors}">
 		            <td th:text="${author.firstName + ' ' + author.lastName}">Author Name</td>
 					<td class="text-center" th:if="${author.deathDate == null}" th:text="${author.birthDate}">Birth Date</td>
-		            <td class="text-center" th:if="${author.deathDate != null}" th:text="${author.birthDate + ' ' + author.deathDate}">Birth Date  Death Date</td>
+		            <td class="text-center" th:if="${author.deathDate != null}" th:text="${author.birthDate + ' → ' + author.deathDate}">Birth Date  Death Date</td>
 		            <td class="text-center" th:text="${author.nationality}">Nationality</td>
 					<td>
 					    <img th:src="${author.foto != null} ? @{'/image/author/' + ${author.id}} : @{/images/default-profile.jpg}"

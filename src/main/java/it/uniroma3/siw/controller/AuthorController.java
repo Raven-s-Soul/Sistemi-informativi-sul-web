@@ -6,8 +6,6 @@ import it.uniroma3.siw.service.AuthorService;
 import jakarta.validation.Valid;
 
 import java.io.IOException;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -63,37 +61,77 @@ public class AuthorController {
         return "redirect:/author";
     }
 
+    @GetMapping("/edit")
+    public String showEditAuthors(Model model) {
+        model.addAttribute("authors", authorService.findAll());
+        return "author/edit";
+    }
 
     // Show form to edit an existing author
     @GetMapping("/edit/{id}")
     public String showEditAuthorForm(@PathVariable Long id, Model model) {
-        Optional<Author> optionalAuthor = Optional.of(authorService.getAuthorById(id));
+        Author author = authorService.getAuthorById(id);
         
-        if (optionalAuthor.isPresent()) {
-            model.addAttribute("author", optionalAuthor.get());
-            return "author/edit";
+        if (author != null ) {
+            model.addAttribute("author", author);
+            // model.addAttribute("books", author.getBooks());
+            return "author/editForm";
         } else {
             // Handle author not found, maybe redirect or return an error page
             return "redirect:/author/edit"; // or some error page
         }
     }
 
-    // Handle edit submission
     @PostMapping("/edit/{id}")
-    public String editAuthor(@PathVariable Long id, @Valid @ModelAttribute Author author,
-                             BindingResult bindingResult, Model model) {
+    public String editAuthor(@PathVariable Long id,
+                             @Valid @ModelAttribute Author author,
+                             BindingResult bindingResult,
+                             @RequestParam MultipartFile imageFile,
+                             Model model) throws IOException {
+        
         if (bindingResult.hasErrors()) {
-            return "author/edit";
+            model.addAttribute("books", author.getBooks()); // In case you need them again in the form
+            return "author/editForm"; // Correct path to the form
         }
-        author.setId(id);
-        authorService.saveAuthor(author);
-        return "redirect:/author";
+
+        Author existingAuthor = authorService.getAuthorById(id);
+        if (existingAuthor == null) {
+            return "redirect:/author/list";
+        }
+
+        // Update standard fields
+        existingAuthor.setFirstName(author.getFirstName());
+        existingAuthor.setLastName(author.getLastName());
+        existingAuthor.setBirthDate(author.getBirthDate());
+        existingAuthor.setDeathDate(author.getDeathDate());
+        existingAuthor.setNationality(author.getNationality());
+
+        // Check and update image only if uploaded
+        if (imageFile != null && !imageFile.isEmpty()) {
+        	Image img = new Image();
+        	img.setAutore(author);
+            img.setImage(imageFile.getBytes());
+            
+            author.setFoto(img);
+            
+            existingAuthor.setFoto(img);
+        }
+
+        authorService.saveAuthor(existingAuthor);
+        return "redirect:/author/list";
+    }
+
+    
+    @GetMapping("/delete")
+    public String showDeleteAuthors(Model model) {
+        model.addAttribute("authors", authorService.findAll());
+        return "author/delete";
     }
 
     // Delete an author
     @GetMapping("/delete/{id}")
     public String deleteAuthor(@PathVariable Long id) {
         authorService.deleteAuthorById(id);
-        return "redirect:/author";
+        return "redirect:/author/delete";
     }
 }
