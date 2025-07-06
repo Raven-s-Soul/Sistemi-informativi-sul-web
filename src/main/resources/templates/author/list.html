@@ -22,7 +22,7 @@
 		            <th>Date</th>
 		            <th>Nazionalità</th>
 		            <th>Foto</th>
-					<!-- <th>Books</th> -->
+					<th>Books</th>
 		        </tr>
 		    </thead>
 		    <tbody class="table-dark">
@@ -34,14 +34,16 @@
 					<td>
 					    <img th:src="${author.foto != null} ? @{'/image/author/' + ${author.id}} : @{/images/default-profile.jpg}"
 					         alt="Foto" 
-					         class="img-thumbnail cover-image-small" />
+					         class="img-thumbnail cover-image-small mx-auto d-block" />
 					</td>
-					<!-- 
-					<td class="text-center">
-					    <span th:if="${author.books != null}" th:each="book : ${author.books}" class="d-block" th:text="${book.title}">Book Title</span>
-					    <span th:if="${author.books == null || #lists.isEmpty(author.books)}">—</span>
+
+					<td>
+					  <ul th:if="${author.books != null and !#lists.isEmpty(author.books)}" class="mb-0">
+					    <li th:each="book : ${author.books}" th:text="${book.title}">Book Title</li>
+					  </ul>
+					  <span th:if="${author.books == null or #lists.isEmpty(author.books)}">—</span>
 					</td>
-				-->
+
 		        </tr>
 		    </tbody>
 		</table>

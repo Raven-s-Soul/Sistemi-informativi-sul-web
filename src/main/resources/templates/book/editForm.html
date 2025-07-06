@@ -67,7 +67,7 @@
 			                <div class="d-flex flex-wrap gap-2">
 			                    <img th:each="img, iterStat : ${book.immagini}"
 			                         th:src="@{'/image/book/' + ${book.id} + '/' + ${iterStat.index}}" 
-			                         class="img-thumbnail cover-image-small"/>
+			                         class="img-thumbnail cover-image-small  mx-auto d-block"/>
 						</div>
 					</div>
             </div>

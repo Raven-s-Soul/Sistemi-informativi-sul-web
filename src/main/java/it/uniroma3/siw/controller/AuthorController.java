@@ -3,6 +3,7 @@ package it.uniroma3.siw.controller;
 import it.uniroma3.siw.model.entities.Author;
 import it.uniroma3.siw.model.entities.Image;
 import it.uniroma3.siw.service.AuthorService;
+import it.uniroma3.siw.service.BookService;
 import jakarta.validation.Valid;
 
 import java.io.IOException;
@@ -20,7 +21,8 @@ public class AuthorController {
     @Autowired
     private AuthorService authorService;
     
-    
+    @Autowired
+    private BookService bookService;
 
 	@GetMapping("/list")
     public String listAuthors(Model model) {
