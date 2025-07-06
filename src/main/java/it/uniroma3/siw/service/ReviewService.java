@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import it.uniroma3.siw.model.entities.Book;
 import it.uniroma3.siw.model.entities.Review;
 import it.uniroma3.siw.model.entities.User;
 import it.uniroma3.siw.repository.ReviewRepository;
@@ -68,5 +69,9 @@ public class ReviewService {
     public List<Review> getReviewsByUser(User currentUser) {
         return reviewRepository.findByUser(currentUser);
     }
+
+	public Optional<Review> findByBookAndUser(Book book, User user) {
+        return reviewRepository.findByBookAndUser(book, user);
+	}
 
 }

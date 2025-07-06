@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -79,10 +80,18 @@ public class ReviewController {
     
     // Show form to add a review for a specific book
     @GetMapping("/add/{bookId}")
-    public String showAddForm(@PathVariable Long bookId, Model model) {
+    public String showAddForm(@PathVariable Long bookId, Model model, @AuthenticationPrincipal UserDetails userDetails) {
         Book book = bookService.getBookById(bookId);
         Review review = new Review();
         review.setBook(book);
+        
+        User user = userService.findByUsername(userDetails.getUsername());
+        Optional<Review> existingReview = reviewService.findByBookAndUser(book, user);
+        
+        if (existingReview.isPresent()) {
+            // Reindirizza alla pagina di modifica della recensione esistente
+            return "redirect:/review/edit/" + existingReview.get().getId();
+        }
 
         model.addAttribute("review", review);
         model.addAttribute("book", book);
