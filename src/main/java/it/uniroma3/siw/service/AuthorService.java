@@ -62,4 +62,9 @@ public class AuthorService {
     public boolean existsById(Long id) {
         return authorRepository.existsById(id);
     }
+
+	public Object findAll() {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -20,4 +20,10 @@ public class CredentialsService {
     public boolean existsByUsername(String username) {
         return credentialsRepository.existsByUsername(username);
     }
+    
+    public String getUsernameByUserId(Long userId) {
+        return credentialsRepository.findByUtenteId(userId)
+                .map(Credentials::getUsername)
+                .orElse(null); // or throw exception, or Optional<String>
+    }
 }

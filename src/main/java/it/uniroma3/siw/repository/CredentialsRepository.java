@@ -8,4 +8,6 @@ import it.uniroma3.siw.model.entities.Credentials;
 public interface CredentialsRepository extends JpaRepository<Credentials, Long> {
     boolean existsByUsername(String username);
     Optional<Credentials> findByUsername(String username);
+    
+    Optional<Credentials> findByUtenteId(Long userId);
 }

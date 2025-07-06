@@ -13,4 +13,5 @@ public class ImageService {
 	public Iterable<Image> findAllImages() {
         return imageRepository.findAll();
     }
+	
 }

@@ -22,7 +22,9 @@ public class Author {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate deathDate;
     private String nationality;
-    private String photoUrl;
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "image_id")
+	private Image foto;
 
     @ManyToMany(mappedBy = "authors")
     private List<Book> books;
@@ -69,16 +71,27 @@ public class Author {
 		this.nationality = nationality;
 	}
 
-	public String getPhotoUrl() {
-		return photoUrl;
+	public Long getId() {
+		return id;
 	}
 
-	public void setPhotoUrl(String photoUrl) {
-		this.photoUrl = photoUrl;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-    
-    
-    
+	public Image getFoto() {
+		return foto;
+	}
+
+	public void setFoto(Image foto) {
+		this.foto = foto;
+	}
+
+	public void setImage(byte[] bytes) {
+	    if (this.foto == null) {
+	        this.foto = new Image();  // create a new Image object if null
+	    }
+	    this.foto.setImage(bytes);
+	}
     
 }

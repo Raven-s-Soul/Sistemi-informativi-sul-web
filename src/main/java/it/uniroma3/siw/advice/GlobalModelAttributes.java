@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import it.uniroma3.siw.model.entities.User;
+import it.uniroma3.siw.service.CredentialsService;
 import it.uniroma3.siw.service.UserService;
 
 @ControllerAdvice
@@ -16,14 +17,20 @@ public class GlobalModelAttributes {
 
 	@Autowired
     private  UserService userService;
+	
+	@Autowired
+    private  CredentialsService credentialService;
 
     @ModelAttribute
     public void addUserToModel(Model model, Principal principal, Authentication authentication) {
         if (principal != null) {
             User user = userService.findByUsername(principal.getName());
+            String username = credentialService.getUsernameByUserId(user.getId());
             model.addAttribute("user", user);
+            model.addAttribute("username", username);
         }
-        boolean isAuthenticated = authentication != null && authentication.isAuthenticated();
-        model.addAttribute("isAuthenticated", isAuthenticated);
+        
+        
+        //model.addAttribute();
     }
 }

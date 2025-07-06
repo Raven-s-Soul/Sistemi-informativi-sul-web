@@ -1,5 +1,7 @@
 package it.uniroma3.siw.model.entities;
 
+import org.springframework.web.multipart.MultipartFile;
+
 import jakarta.persistence.*;
 
 @Entity
@@ -8,8 +10,12 @@ public class Image {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
 
-	private String nameFile;
-	private String path;
+	@Lob
+	@Column(nullable = true)
+	private byte[] image;
+	
+	@Transient
+	private MultipartFile imageFile; //Transiente per upload di immagini
 
 	@ManyToOne
 	@JoinColumn(name = "book_id")
@@ -22,22 +28,6 @@ public class Image {
 	// Getter e Setter
 	public Long getId() {
 		return id;
-	}
-
-	public String getNameFile() {
-		return nameFile;
-	}
-
-	public void setNomeFile(String nomeFile) {
-		this.nameFile = nomeFile;
-	}
-
-	public String getPath() {
-		return path;
-	}
-
-	public void setPath(String path) {
-		this.path = path;
 	}
 
 	public Book getLibro() {
@@ -54,5 +44,21 @@ public class Image {
 
 	public void setAutore(Author autore) {
 		this.autore = autore;
+	}
+
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
+	}
+
+	public MultipartFile getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(MultipartFile imageFile) {
+		this.imageFile = imageFile;
 	}
 }

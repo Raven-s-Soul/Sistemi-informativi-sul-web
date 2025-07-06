@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{/fragments/layouts/base_layout}">
+<head>
+    <title>Add Book</title>
+</head>
+<body>
+<section layout:fragment="content">
+    <div class="container py-5">
+        <h2>Add New Book</h2>
+        <form th:action="@{/book/add}" th:object="${book}" method="post" novalidate>
+            <div class="mb-3">
+                <label for="title" class="form-label">Title</label>
+                <input type="text" th:field="*{title}" class="form-control" id="title" required />
+                <div class="text-danger" th:if="${#fields.hasErrors('title')}" th:errors="*{title}"></div>
+            </div>
+
+            <div class="mb-3">
+                <label for="author" class="form-label">Author</label>
+				<select multiple th:field="*{authors}" class="form-control" id="authors" required>
+				  <option th:each="author : ${allAuthors}"
+				          th:value="${author.id}"
+				          th:text="${author.name}">
+				  </option>
+				</select>
+				<div class="text-danger" th:if="${#fields.hasErrors('authors')}" th:errors="*{authors}"></div>
+            </div>
+
+            <button type="submit" class="btn btn-success">Add Book</button>
+        </form>
+    </div>
+</section>
+</body>
+</html>

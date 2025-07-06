@@ -62,4 +62,8 @@ public class BookService {
     public boolean existsById(Long id) {
         return bookRepository.existsById(id);
     }
+
+	public Optional<Book> findById(Long id) {
+		  return bookRepository.findById(id);
+	}
 }
