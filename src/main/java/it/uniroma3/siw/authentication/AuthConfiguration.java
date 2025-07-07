@@ -30,7 +30,7 @@ public class AuthConfiguration {
                 "SELECT username, password, TRUE as enabled FROM credentials WHERE username = ?"
             )
             .authoritiesByUsernameQuery(
-            	"SELECT c.username, u.role FROM credentials c JOIN users u ON c.utente_id = u.id WHERE c.username = ?"
+            	"SELECT c.username, u.role FROM credentials c JOIN users u ON c.user_id = u.id WHERE c.username = ?"
             );
     }
 

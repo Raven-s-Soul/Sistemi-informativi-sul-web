@@ -9,8 +9,6 @@ public class RegisteredController {
 
 	@GetMapping("/registered")
 	public String showRegistered(Model model) {
-
-	    model.addAttribute("message", "Welcome to the home page!");
 	    return "registered/registered";
 	}
 }
